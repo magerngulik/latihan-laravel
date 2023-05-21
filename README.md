@@ -47,23 +47,24 @@ Perlu di ingat nama nya harus sama antara nama di url dengan nama di dalam param
 
 ## Catatan Untuk video ke 8 
 - buat semua model dan migrasi dengan printah berikut 
-* php artisan make:model -m Category
+    * php artisan make:model -m Category
 - kemudian edit tambahkan column nama dan slug pada table category
-* $table->string('name')->unique();
-* $table->string('slug')->unique();
+    * $table->string('name')->unique();
+    * $table->string('slug')->unique();
 - selanjutkan buatlah column foreignKey di tabel post
-* $table->foreignId("category_id");
+    * $table->foreignId("category_id");
 - refresh artisan migrate dengan kode berikut:
-* php artisan migrate:fresh
+    * php artisan migrate:fresh
 - isi data category dengan create atau manual satu persatu
-* satu persatu 
-    $category->name ="Programing"
-    $category->slug ="programing"
+    * satu persatu 
+    `$category->name ="Programing"`
+    `$category->slug ="programing"`
 
 * dengan create
-    $category::create([
-        "name" => "Programing",
-        "slug" => "programing"
-    ])
+    `$category::create([`
+        `"name" => "Programing",`
+        `"slug" => "programing"`
+    `])`
+
 * jangan lupa untuk mengizinkan ada nya masuk di file migration
 
