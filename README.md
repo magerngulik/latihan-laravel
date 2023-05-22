@@ -87,7 +87,7 @@ Perlu di ingat nama nya harus sama antara nama di url dengan nama di dalam param
  `$post::where('category_id',1)->get()`
 
 ## Untuk lebih memahami tentang relationship maka anda bisa melihat gambar berikut:
-![App Screenshot](https://raw.githubusercontent.com/magerngulik/sipador/main/assets/presentasi/1.png)
+![App Screenshot](https://raw.githubusercontent.com/magerngulik/latihan-laravel/main/public/img/1.png)
 
 
 
