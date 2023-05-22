@@ -59,12 +59,35 @@ Perlu di ingat nama nya harus sama antara nama di url dengan nama di dalam param
     * satu persatu 
     `$category->name ="Programing"`
     `$category->slug ="programing"`
+    `$category->save()`
 
-* dengan create
+    * dengan create
     `$category::create([`
         `"name" => "Programing",`
         `"slug" => "programing"`
     `])`
 
-* jangan lupa untuk mengizinkan ada nya masuk di file migration
+- jangan lupa untuk mengizinkan ada nya masuk di file model
+   `protected $fillable = ["title", "excerpt","body"];` Menseleksi semua yang ingin masuk
+   `protected $guarded = ["id"];` Menseleksi semua yang ingin di lindungi
+
+- selanjutnya input data post yang sudah memiliki category id dengan tinker create
+    * example
+    `$post::create([`
+        `"title"=>"Postingan Ke Ketiga",`
+        `"category_id" => 2,`
+        `"slug"=>"postingan-ke-ketiga",`
+        `"excerpt"=>"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi eveniet atque ut exercitationem nesciunt modi",`
+        `"body"=> "<p> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi eveniet atque ut exercitationem nesciunt modi. Et,` `dolores adipisci dignissimos quo distinctio ipsum officia, sit nulla delectus possimus recusandae nostrum facere placeat aliquid ab.` `Vero laudantium ex cum ullam repudiandae natus non veniam explicabo labore est aperiam alias porro consequatur beatae necessitatibus` `doloremque modi,</p>`
+        `<p> velit ut rerum? Ipsum ipsa cumque, consequuntur quae facere sit nulla maiores odio exercitationem officia molestiae molestias` `tenetur veritatis. Fuga impedit optio corrupti officiis atque, nesciunt nisi eius repudiandae quibusdam sunt ea numquam vitae amet` `ipsum porro aliquid facilis enim asperiores sequi quaerat, odio cum. Esse rerum sapiente suscipit provident fuga neque placeat!` `Temporibus, enim nihil molestias earum tempora adipisci, aliquid soluta commodi itaque nam, perspiciatis quam.</p>`
+        `<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum cupiditate dolorem sunt eveniet! Minima quibusdam debitis` `voluptates amet ex veniam, deleniti sit vel, commodi placeat similique optio, a perspiciatis consequuntur beatae iure aspernatur nam.` `Officiis minus eos ipsam consectetur ipsa omnis quos voluptas sunt blanditiis perspiciatis, libero quod molestiae saepe.</p>",`
+    `]);`
+
+- untuk melihat data yang sudah di seleksi dengan where bisa menggunakan perintah berikut 
+ `$post::where('category_id',1)->get()`
+
+## Untuk lebih memahami tentang relationship maka anda bisa melihat gambar berikut:
+![App Screenshot](https://raw.githubusercontent.com/magerngulik/sipador/main/assets/presentasi/1.png)
+
+
 
