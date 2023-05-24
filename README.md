@@ -89,5 +89,55 @@ Perlu di ingat nama nya harus sama antara nama di url dengan nama di dalam param
 ## Untuk lebih memahami tentang relationship maka anda bisa melihat gambar berikut:
 ![App Screenshot](https://raw.githubusercontent.com/magerngulik/latihan-laravel/main/public/img/1.png)
 
+- untuk menghubungkan antara model post dan category harus di definisikan seperti berikut ini:
+    * many to one(dimiliki)
+    `Post{`
+    `public function category()`
+    `{`
+        `return $this->belongsTo(Category::class);`
+    `}`
+    `}`
+
+    * one to many(memiliki)
+    `Category{`
+    `public function post()`
+    `{`
+        `return $this->hasMany(Post::class);`
+    `}`
+    `}`
+
+- Sekarang tinggal panggil di dalam view 
+`<p> By Sandika Galih in {{ $post->category->name }}</p>`
+
+- bikin view untuk menghandle category dan categories
+
+
+
+## Catatan Untuk video ke 9 
+Di video ke 9 ini akan membahas yang nama nya seeder, sederhananya perintah ini akan mempermudah dalam mumbuat data dummy di dalam database kita ketika pembuatan
+
+-lokasi
+`database\seeders\`
+
+- berfungsi untuk melakukan running di dalam file databaseSeeder
+`php artisan db:seed`
+
+- bisa juga ketika kita melakukan migration dengan menambahkan `--seed` pada akhir migration seperti berikut ini:
+`php artisan migrate:fresh --seed`
+
+## catatan untuk video ke 10
+pada awal di video 10 kita akan mengenal library faker yang di gunakan untuk membuat data dummy bisa di akses di web berikut:
+https://fakerphp.github.io/formatters/
+
+cara untuk mengubah settingan faker pada laravel ke bahasa indonesia sebagai berikut:
+- buka file `config\app` kemudia serching faker 
+- edit file faker tersebut seperti berikut ini: 
+`'faker_locale' => env('FAKER_LOCALE','en_US'),`
+- langkah selanjutnya buka file .env lalu buat perintah beriut di paling bawah
+FAKER_LOCALE =id_ID
+
+
+
+
 
 
