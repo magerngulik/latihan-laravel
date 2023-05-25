@@ -4,7 +4,7 @@
 
 <article>
     <h1>{{ $post->title }}</h1>
-    <p class="fs-5"> By <a href="#" class="text-decoration-none text-dark">{{ $post->user->name }}</a> in <a href="/categories/{{ $post->category->slug }}" class="text-decoration-none ">{{ $post->category->name }}</a> </p>
+    <p class="fs-5"> By <a href="#" class="text-decoration-none text-dark">{{ $post->author->name }}</a> in <a href="/categories/{{ $post->category->slug }}" class="text-decoration-none ">{{ $post->category->name }}</a> </p>
     <h5>{{ $post->author }}</h5>
     <p>{!! $post->body!!}</p>
 </article>

@@ -134,7 +134,27 @@ cara untuk mengubah settingan faker pada laravel ke bahasa indonesia sebagai ber
 - edit file faker tersebut seperti berikut ini: 
 `'faker_locale' => env('FAKER_LOCALE','en_US'),`
 - langkah selanjutnya buka file .env lalu buat perintah beriut di paling bawah
-FAKER_LOCALE =id_ID
+`FAKER_LOCALE =id_ID`
+
+- langkah membuat factory bisa menggunakan snippet atau menggunakan terminal:
+`php artisan make:factory` hanya factory saja
+`php artisan make:factory -mfs` dengan migration factory dan seeder
+
+- untuk mendapatkan data berdasarkan urutan terahir dari uid
+`"posts"=> Post::latest()->get()`
+
+- catatan untuk video ke 11
+pertama kita akan mengatasi permasalahan n + 1 problem dimana ini terjadi diakibatkan data yang kita ambil itu melakukan query ke db secara berulang ulang untuk mengetahui berapa jumlah data query yang kita panggil kita bisa menggunakan sebuah extension dari laravel yang bernama clockwork 
+- cara install clockwork
+    * kunjugi situs berikut  
+    `https://underground.works/clockwork/`
+    * kemudian install dengan komposer di directory project kita
+    `composer require itsgoingd/clockwork`
+    * lalu install clockwork extension di pada browser chrome dengan kata kunci clock work
+- cara pakai clock work
+    * klik kanan pada bagian browser project kita lalu klik kanan inspect element -> clockwork
+
+
 
 
 
