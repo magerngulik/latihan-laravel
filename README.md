@@ -170,7 +170,27 @@ untuk menggunakan eager loading kita bisa menggunakan kata kunci `with`
             "posts"=> Post::with(['category','author'])->latest()->get()
         ]);
     } 
-    ```
+
+    * contoh 2: terkadang kita membutuhkan data setelah model utama di load seperti menggunakan route model binding cara ini tidak bisa menggunakan eager loadin tetapi bisa bisa menggunakan cara yang lain yang di sebut *lazy eager loading* yang menggunakan kata kunci *load*
+    * untuk lengkapnya bisa baca di sini: https://laravel.com/docs/5.2/eloquent-relationships#lazy-eager-loading
+
+          ```php
+
+        Route::get('/authors/{author:username}',function (User $author){
+                                                //ini route model binding
+            return view('posts',
+            [
+                "title" => "Post By Author: $author->name",
+                "posts" => $author->post->load('author','category'),
+                                        //fungsi load di sini  
+            ]
+            );
+        });
+
+
+
+
+
 
 
 
