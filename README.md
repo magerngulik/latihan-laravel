@@ -143,7 +143,8 @@ cara untuk mengubah settingan faker pada laravel ke bahasa indonesia sebagai ber
 - untuk mendapatkan data berdasarkan urutan terahir dari uid
 `"posts"=> Post::latest()->get()`
 
-- catatan untuk video ke 11
+
+## catatan untuk video ke 11
 pertama kita akan mengatasi permasalahan n + 1 problem dimana ini terjadi diakibatkan data yang kita ambil itu melakukan query ke db secara berulang ulang untuk mengetahui berapa jumlah data query yang kita panggil kita bisa menggunakan sebuah extension dari laravel yang bernama clockwork 
 - cara install clockwork
     * kunjugi situs berikut  
@@ -153,6 +154,26 @@ pertama kita akan mengatasi permasalahan n + 1 problem dimana ini terjadi diakib
     * lalu install clockwork extension di pada browser chrome dengan kata kunci clock work
 - cara pakai clock work
     * klik kanan pada bagian browser project kita lalu klik kanan inspect element -> clockwork
+
+- untuk mengatasi permasalahan n+1 ini laravel sudah menyediakan yang nama nya eager loading yang akan memuat seluruh data hasil join ke table lain sekalian ketika perintah pertama di mulai lengkapnya bisa di baca di sini
+    * https://laravel.com/docs/5.2/eloquent-relationships#eager-loading
+
+- cara menggunakan eager loading 
+untuk menggunakan eager loading kita bisa menggunakan kata kunci `with`
+
+- ada 2 cara untuk melakukan eager loading ini yaitu dengan memangguilnya langsung ketika mengakses model atau dengan menuliskan nya langsung di dalam model tersebut
+    * contoh 1:
+        ```php
+        public function index(){
+        return view('posts',[
+            "title"=> "All Post",
+            "posts"=> Post::with(['category','author'])->latest()->get()
+        ]);
+    } 
+    ```
+
+
+
 
 
 
