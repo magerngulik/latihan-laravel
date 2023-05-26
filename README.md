@@ -197,6 +197,109 @@ untuk menggunakan eager loading kita bisa menggunakan kata kunci `with`
             ]
             );
         });
+
+## Catatan untuk video ke 12
+pada video ke 12 ini adalah tahapan redesign ui dan pada tahapan ini akan menjelaskan fungsi atau method yang di gunakan di dalam view 
+- untuk menampilkan data pertama bisa menggunakan index array ke n untuk di akses sebagai contoh misalkan kita inggin mengakses index array pertama maka seperti berikut ini:
+        ```php
+        <a href="/post/{{ $posts[0]->slug }}" class="text-decoration-none text-dark">{{$posts[0]->title }}</a>
+- untuk melakukan pencekan jumlah data yang ada di dalam array pada bagian view seperti berikut:
+    ```php
+    @if ($posts->count())
+
+- untuk melakukan skip pada bagian ketika melakukan looping pada bagian view seperti berikut:
+  ```php
+    @if ($posts->count())
+
+- pada project ini saya belajar beberapa tentang bootsrap
+    * menambahkan text di atas gambar dengan class 
+     ```php
+     <div class="position-absolute text-white p-2" style="background-color: rgba(0, 0, 0, 0.5)"> <a href="/categories/{{ $posts[0]->category->slug }}"  
+- pada project ini juga belajar bagimana cara kita menambahkan atau join data dalam string, yang akan di terapkan pada factory post data body karna memerlukan bentuk html paragrap, ada 2 cara yang bisa di gunakan dengan menggunakan join dan map collectin
+    * dengan menggunakan join
+      ```php
+      class PostFactory extends Factory
+        {
+        public function definition(): array
+        {
+            return [
+                'title' => $this->faker->sentence(mt_rand(2,8)),
+                'slug' => $this->faker->slug(),
+                'excerpt' => $this->faker->paragraph(),
+                'body' => '<p>'.implode('</p><p>', $this->faker->paragraphs(5,10) , '</p>'),
+                'user_id' => mt_rand(1,5),
+                'category_id' => mt_rand(1,2),
+            ];
+        }
+        }
+        //implode berfungsi sama seperti join pada string
+    * dengan menggunakan map
+      
+        class PostFactory extends Factory
+        {
+            public function definition(): array
+            {
+                return [
+                    'title' => $this->faker->sentence(mt_rand(2,8)),
+                    'slug' => $this->faker->slug(),
+                    'excerpt' => $this->faker->paragraph(),
+                    'body' => collect($this->faker->paragraphs(mt_rand(5,10)))
+                        ->map(fn($p)=> "<p>$p</p>"),
+                    'user_id' => mt_rand(1,5),
+                    'category_id' => mt_rand(1,2),
+                ];
+            }
+        }
+
+- selanjutnya kita akan belajar bagaimana membuat sebuah flexbox dan flexfill sehingga mempermudah dalam memposisikan item di dalam design bootrap
+    * contoh 
+      ```php
+        <div class="col-md-4">
+            <div class="card text-bg-dark">
+                <img src="https://source.unsplash.com/500x500/?{{$category->name}}" class="card-img" alt="{{  $category->name }}">
+                <div class="card-img-overlay d-flex align-items-center p-0">
+                <h5 class="card-title text-center py-2 flex-fill" style="background-color: rgba(0, 0, 0,0.7)">{{ $category->name }}</h5>
+                </div>
+            </div>
+        </div>
+
+## catatan video ke 13
+- permulaan dari video ini akan membuat sebuah form untuk perncarian sebagai berikut:
+    ```php
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-6">
+            <form action="/posts">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search.." name="search" value="{{ request('search') }}">
+                    <button class="btn btn-danger" type="submit" >Search</button>
+                  </div>
+            </form>
+        </div>
+    </div>
+
+- selanjutnya untuk mendapatkan data dari form yang menggunakan method get bisa menggunakan *request('name field')* pada controller atau route
+
+    ```php
+    public function index(){
+        $posts = Post::latest();
+        if (request('search')) {
+            $posts->where('title','like','%'.request('search').'%');
+        }
+        return view('posts',[
+            "title"=> "All Post",
+            "active" => "Posts",
+            "posts"=> $posts->get()
+        ]);
+    }
+- untuk melakukan seleksi data maka bisa menggunakan where dan orWhere jika punya lebih dari satu kondisi
+    ```php
+     $posts->where('title','like','%'.request('search').'%')
+           ->orWhere('body','like','%'.request('search')."%");
+
+
+
+        
+
     
 
 
